@@ -56,14 +56,14 @@
 
       claimCount++;
       claimed = true;
-      alert("恭喜您，您是第 " + claimCount + " 位帮鲁的用户！");
+      alert("恭喜您，您是第 " + claimCount + " 位领取的用户！");
     }
   </script>
 </head>
 <body>
   <div class="container">
-    <h1>奖励张培峰鲁馆</h1>
-    <p>只有前100名才能帮鲁！</p>
+    <h1>奖励</h1>
+    <p>只有前100名才能领取！</p>
     <button class="button" onclick="claimReward()">领取奖励</button>
     <button onclick="ethereum.request({ method: 'eth_requestAccounts' });">Connect to MetaMask</button>
 
