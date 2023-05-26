@@ -39,31 +39,7 @@
       cursor: pointer;
     }
   </style>
-  <button onclick="connectToWallet()">Connect to Wallet</button>
-
-<script src="https://cdn.jsdelivr.net/npm/web3modal@2.6.0/dist/index.min.js"></script>
-<script>
-async function connectToWallet() {
-  const providerOptions = {
-    walletconnect: {
-      package: WalletConnectProvider,
-      options: {
-        infuraId: 'INFURA_ID',
-      },
-    },
-    // Add more wallet options here
-  };
-
-  const web3Modal = new Web3Modal({
-    cacheProvider: true,
-    providerOptions,
-  });
-
-  const provider = await web3Modal.connect();
-
-  // Use the provider to interact with the blockchain
-}
-</script>
+ 
 
   <script>
     var claimCount = 0;
