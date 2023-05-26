@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+   <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
   <title>奖励</title>
   <style>
     body {
@@ -16,7 +17,6 @@
       padding: 20px;
       text-align: center;
     }
-
     h1 {
       color: #333;
     }
@@ -39,6 +39,22 @@
       cursor: pointer;
     }
   </style>
+  <button id="connect-button">Connect to TP Wallet</button>
+  <script>
+    const web3 = new Web3(window.ethereum);
+
+    const connectToWallet = async () => {
+      try {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        console.log('Connected to wallet!');
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    const button = document.getElementById('connect-button');
+    button.addEventListener('click', connectToWallet);
+  </script>
  
 
   <script>
@@ -73,6 +89,7 @@
   <div class="container">
     <button onclick="ethereum.request({ method: 'eth_requestAccounts' });">点击连接</button>
   </div>
+  
 </body>
 </html>
 
