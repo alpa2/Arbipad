@@ -1,4 +1,3 @@
-// 1. Create global userWalletAddress variable
 window.userWalletAddress = null;
 
 // 2. when the browser is ready
@@ -126,7 +125,10 @@ const logout = () => {
   
   // when the user clicks the logout button run the logout function
   document.querySelector(".logout-btn").addEventListener("click", logout);
-function claimReward() {
+  var claimCount = 0;
+  var claimed = false;
+
+  function claimReward() {
     claimCount++;
     claimed = true;
     alert("Congratulations on joining the whitelist waiting list. We will take a snapshot of the top 1000 users. Please be patient...");
