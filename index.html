@@ -1,96 +1,50 @@
+<!-- index.html -->
 <!DOCTYPE html>
-<html>
-<head>
-   <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
-  <title>奖励</title>
-  <style>
-    body {
-      background-color: #F9F9F9;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    .container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-      text-align: center;
-    }
-    h1 {
-      color: #333;
-    }
+    <!-- Web3.js LIBRARY -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.1/web3.min.js"
+      integrity="sha512-GKw4QT/RccGJIwQxY3MhyiQ5pHrhQ8SuKFEafV+WcpOvtz7iYFQuQGFCvmGlHLctJTe8KrWU1FqvF7VOkEAJtw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
 
-    p {
-      color: #666;
-      margin-bottom: 20px;
-    }
+    <!-- CSS STYLES -->
+    <link rel="stylesheet" href="index.css" />
+    <title>Web3 Login</title>
+  </head>
+  <body>
 
-    .button {
-      background-color: #4CAF50;
-      border: none;
-      color: white;
-      padding: 10px 20px;
-      text-align: center;
-      text-decoration: none;
-      display:inline-block;
-      font-size: 16px;
+    <!-- LOGIN SECTION -->
+    <section class="login-section">
+      <button class="login-btn">🔓 Log in with Web3</button>
+      <span class="instruction">
+        Ensure to have an Ethereum based wallet installed i.e MetaMask
+      </span>
+    </section>
 
-      cursor: pointer;
-    }
-  </style>
-  <button id="connect-button">Connect to TP Wallet</button>
-  <script>
-    const web3 = new Web3(window.ethereum);
+    <!-- DASHBOARD SECTION -->
+    <section class="dashboard-section">
+      <h2 class="wallet-status">Wallet Connected! 🤝</h2>
+      <h3 class="wallet-address-heading">
+        ETH Wallet Address:
+        <span class="wallet-address"></span>
+      </h3>
+      <h3 class="wallet-balance-heading">
+       ETH Balance:
+        <span class="wallet-balance"></span>
+      </h3>
+      <button class="logout-btn">🔐 Log out</button>
+    </section>
+  </body>
 
-    const connectToWallet = async () => {
-      try {
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-        console.log('Connected to wallet!');
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    const button = document.getElementById('connect-button');
-    button.addEventListener('click', connectToWallet);
-  </script>
- 
-
-  <script>
-    var claimCount = 0;
-    var claimed = false;
-
-    function claimReward() {
-      if (claimed) {
-        alert("抱歉，您已经领取过奖励了！");
-        return;
-      }
-
-      if (claimCount >= 100) {
-        alert("抱歉，奖励已经全部领取完毕！");
-        return;
-      }
-
-      claimCount++;
-      claimed = true;
-      alert("恭喜您，您是第 " + claimCount + " 位领取的用户！");
-    }
-  </script>
-</head>
-<body>
-  <div class="container">
-    <h1>奖励</h1>
-    <p>只有前1000名才能领取！</p>
-    <button class="button" onclick="claimReward()">领取奖励</button>
-    
-
-  </div>
-  <div class="container">
-    <button onclick="ethereum.request({ method: 'eth_requestAccounts' });">点击连接</button>
-  </div>
-  
-</body>
+  <!-- SCRIPT -->
+  <script src="./index.js"></script>
 </html>
 
 
