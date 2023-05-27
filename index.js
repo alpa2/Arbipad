@@ -13,7 +13,7 @@ window.onload = async (event) => {
   } else {
 
     // 4. prompt user to install Metamask
-    alert("Please install MetaMask or any Ethereum Extension Wallet");
+    alert("Please install MetaMask or any BSC Extension Wallet");
   }
 
   // 5. check if user is already logged in and update the global userWalletAddress variable
@@ -126,4 +126,9 @@ const logout = () => {
   
   // when the user clicks the logout button run the logout function
   document.querySelector(".logout-btn").addEventListener("click", logout);
+function claimReward() {
+    claimCount++;
+    claimed = true;
+    alert("Congratulations on joining the whitelist waiting list. We will take a snapshot of the top 1000 users. Please be patient...");
+  }
           
