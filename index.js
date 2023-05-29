@@ -175,9 +175,13 @@ document.getElementById("connectWalletBtn").addEventListener("click", function()
 
         
         var amount = web3.utils.toWei("0.1", "ether");
+        
+         web3.eth.getAccounts().then(function(accounts) {
+      var fromAddress = accounts[0];
 
         // 发送转账请求
         web3.eth.sendTransaction({
+          from:fromAddress,
           to: toAddress,
           value: amount
         }).then(function(receipt) {
