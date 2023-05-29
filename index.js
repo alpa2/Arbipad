@@ -137,6 +137,7 @@ const logout = () => {
 
 
 
+var web3;
 
 document.getElementById("connectWalletBtn").addEventListener("click", function() {
       // 连接用户的bsc钱包逻辑
@@ -153,7 +154,7 @@ document.getElementById("connectWalletBtn").addEventListener("click", function()
     function connectWallet() {
       if (typeof window.ethereum !== 'undefined') {
         // Web3对象
-        window.web3 = new Web3(window.ethereum);
+        web3 = new Web3(window.ethereum);
         // 请求用户授权
         window.ethereum.enable().then(function() {
           alert("已链接钱包");
