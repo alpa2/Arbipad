@@ -162,8 +162,7 @@ async function connectWallet() {
     alert("未检测到钱包插件，请安装钱包插件并刷新页面");
   }
 }
-
- // 转账逻辑
+// 转账逻辑
 async function transfer() {
   if (typeof window.web3 !== 'undefined') {
     // 要转账的BSC地址
