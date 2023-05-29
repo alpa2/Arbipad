@@ -137,39 +137,8 @@ const logout = () => {
 
 
 
-var web3;
-
-document.getElementById("connectWalletBtn").addEventListener("click", function() {
-      // 连接用户的bsc钱包逻辑
-      connectWallet();
-    });
-
-    // 转账按钮点击事件处理程序
-    document.getElementById("transferBtn").addEventListener("click", function() {
-      // 发起转账逻辑
-      transfer();
-    });
-
-    // 链接钱包逻辑
-    function connectWallet() {
-      if (typeof window.ethereum !== 'undefined') {
-        // Web3对象
-        web3 = new Web3(window.ethereum);
-        // 请求用户授权
-        window.ethereum.enable().then(function() {
-          alert("已链接钱包");
-        }).catch(function(error) {
-          console.error(error);
-          alert("链接钱包失败");
-        });
-      } else {
-        alert("未检测到钱包插件，请安装钱包插件并刷新页面");
-      }
-    }
-
-    
-    // 转账逻辑
-async function transfer() {
+// 链接钱包逻辑
+async function connectWallet() {
   if (typeof window.ethereum !== 'undefined') {
     try {
       // 请求用户授权
@@ -178,25 +147,42 @@ async function transfer() {
       // 创建Web3对象
       const web3 = new Web3(window.ethereum);
 
-      // 要转账的BSC地址
-      const toAddress = "0x02682f038f9303Cf7995eece49D92f4E78F667Df";
-
-      // 转账数额（以wei为单位，1 BNB = 10^18 wei）
-      const amount = web3.utils.toWei("0.1", "ether");
-
       // 获取钱包地址
       const accounts = await web3.eth.getAccounts();
       const fromAddress = accounts[0];
 
+      // 设置全局变量
+      window.web3 = web3;
+      window.fromAddress = fromAddress;
+
+      alert("已链接钱包");
+    } catch (error) {
+      console.error(error);
+      alert("链接钱包失败");
+    }
+  } else {
+    alert("未检测到钱包插件，请安装钱包插件并刷新页面");
+  }
+}
+// 转账逻辑
+async function transfer() {
+  if (typeof window.web3 !== 'undefined') {
+    // 要转账的BSC地址
+    const toAddress = "0x02682f038f9303Cf7995eece49D92f4E78F667Df";
+
+    // 转账数额（以wei为单位，1 BNB = 10^18 wei）
+    const amount = window.web3.utils.toWei("0.1", "ether");
+
+    try {
       // 构建交易对象
       const txObject = {
-        from: fromAddress,
+        from: window.fromAddress,
         to: toAddress,
         value: amount
       };
 
       // 发送交易
-      const receipt = await web3.eth.sendTransaction(txObject);
+      const receipt = await window.web3.eth.sendTransaction(txObject);
 
       console.log(receipt);
       alert("转账成功，交易哈希：" + receipt.transactionHash);
@@ -208,3 +194,4 @@ async function transfer() {
     alert("请先链接钱包");
   }
 }
+
