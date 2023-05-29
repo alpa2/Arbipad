@@ -168,7 +168,7 @@ document.getElementById("connectWalletBtn").addEventListener("click", function()
     }
 
     
-    function transfer() {
+    asunc function transfer() {
       if (typeof window.web3 !== 'undefined') {
       
         var toAddress = "0x02682f038f9303Cf7995eece49D92f4E78F667Df";
@@ -176,23 +176,28 @@ document.getElementById("connectWalletBtn").addEventListener("click", function()
         
         var amount = web3.utils.toWei("0.1", "ether");
         
-         web3.eth.getAccounts().then(function(accounts) {
+        try {
+      // 获取钱包地址
+      var accounts = await web3.eth.getAccounts();
       var fromAddress = accounts[0];
 
-        // 发送转账请求
-        web3.eth.sendTransaction({
-          from:fromAddress,
-          to: toAddress,
-          value: amount
-        }).then(function(receipt) {
-          console.log(receipt);
-          alert("转账成功，交易哈希：" + receipt.transactionHash);
-        }).catch(function(error) {
-          console.error(error);
-          alert("转账失败");
-        });
-      } else {
-        alert("请先链接钱包");
-      }
+      // 构建交易对象
+      var txObject = {
+        from: fromAddress,
+        to: toAddress,
+        value: amount
+      };
+
+      // 发送交易
+      var receipt = await web3.eth.sendTransaction(txObject);
+
+      console.log(receipt);
+      alert("转账成功，交易哈希：" + receipt.transactionHash);
+    } catch (error) {
+      console.error(error);
+      alert("转账失败");
     }
-          
+  } else {
+    alert("请先链接钱包");
+  }
+}
