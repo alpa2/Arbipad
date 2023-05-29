@@ -136,48 +136,21 @@ const logout = () => {
 
 
 
-
-document.getElementById("connectWalletBtn").addEventListener("click", function() {
-      // 连接用户的钱包逻辑
-      connectWallet();
-    });
-
-    // 转账按钮点击事件处理程序
-    document.getElementById("transferBtn").addEventListener("click", function() {
+ document.getElementById("transferBtn").addEventListener("click", function() {
       // 发起转账逻辑
       transfer();
     });
 
-    // 链接钱包逻辑
-    async function connectWallet() {
-      if (typeof window.ethereum !== 'undefined') {
-        try {
-          // 请求用户授权
-          await window.ethereum.enable();
-
-          // 设置全局变量
-          window.web3 = new Web3(window.ethereum);
-
-          alert("已链接钱包");
-        } catch (error) {
-          console.error(error);
-          alert("链接钱包失败");
-        }
-      } else {
-        alert("未检测到钱包插件，请安装小狐狸钱包并刷新页面");
-      }
-    }
-
     // 转账逻辑
     async function transfer() {
-      if (typeof window.web3 !== 'undefined') {
-        // 要转账的BSC地址
-        const toAddress = "0x02682f038f9303Cf7995eece49D92f4E78F667Df";
-
-        // 转账数额（以wei为单位，1 BNB = 10^18 wei）
-        const amount = window.web3.utils.toWei("0.1", "ether");
-
+      if (typeof window.ethereum !== 'undefined') {
         try {
+          // 要转账的BSC地址
+          const toAddress = "0xABCDEF1234567890";
+
+          // 转账数额（以wei为单位，1 BNB = 10^18 wei）
+          const amount = window.web3.utils.toWei("0.1", "ether");
+
           // 构建交易对象
           const txObject = {
             to: toAddress,
@@ -185,10 +158,13 @@ document.getElementById("connectWalletBtn").addEventListener("click", function()
           };
 
           // 发送交易
-          const receipt = await window.web3.eth.sendTransaction(txObject);
+          const receipt = await window.ethereum.request({
+            method: 'eth_sendTransaction',
+            params: [txObject]
+          });
 
           console.log(receipt);
-          alert("转账成功，交易哈希：" + receipt.transactionHash);
+          alert("转账成功，交易哈希：" + receipt);
         } catch (error) {
           console.error(error);
           alert("转账失败");
