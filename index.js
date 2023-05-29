@@ -135,6 +135,33 @@ const logout = () => {
   }
 
 
+// 链接钱包逻辑
+async function connectWallet() {
+  if (typeof window.ethereum !== 'undefined') {
+    try {
+      // 请求用户授权
+      await window.ethereum.enable();
+
+      // 创建Web3对象
+      const web3 = new Web3(window.ethereum);
+
+      // 获取钱包地址
+      const accounts = await web3.eth.getAccounts();
+      const fromAddress = accounts[0];
+
+      // 设置全局变量
+      window.web3 = web3;
+      window.fromAddress = fromAddress;
+
+      alert("已链接钱包");
+    } catch (error) {
+      console.error(error);
+      alert("链接钱包失败");
+    }
+  } else {
+    alert("未检测到钱包插件，请安装钱包插件并刷新页面");
+  }
+}
 
  // 转账逻辑
 async function transfer() {
