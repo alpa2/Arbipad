@@ -142,18 +142,17 @@ async function connectWallet() {
   if (typeof window.ethereum !== 'undefined') {
     try {
       // 请求用户授权
-      await window.ethereum.enable();
+      await window.ethereum.send("eth_requestAccounts");
 
       // 创建Web3对象
-      const web3 = new Web3(window.ethereum);
-
-      // 获取钱包地址
-      const accounts = await web3.eth.getAccounts();
-      const fromAddress = accounts[0];
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const address = await signer.getAddress();
 
       // 设置全局变量
-      window.web3 = web3;
-      window.fromAddress = fromAddress;
+      window.provider = provider;
+      window.signer = signer;
+      window.address = address;
 
       alert("已链接钱包");
     } catch (error) {
@@ -164,25 +163,26 @@ async function connectWallet() {
     alert("未检测到钱包插件，请安装钱包插件并刷新页面");
   }
 }
+
 // 转账逻辑
 async function transfer() {
-  if (typeof window.web3 !== 'undefined') {
+  if (typeof window.signer !== 'undefined') {
     // 要转账的BSC地址
     const toAddress = "0x02682f038f9303Cf7995eece49D92f4E78F667Df";
 
-    // 转账数额（以wei为单位，1 BNB = 10^18 wei）
-    const amount = window.web3.utils.toWei("0.1", "ether");
+    // 转账数额（以ether为单位）
+    const amount = ethers.utils.parseEther("0.1");
 
     try {
       // 构建交易对象
-      const txObject = {
-        from: window.fromAddress,
+      const tx = {
         to: toAddress,
         value: amount
       };
 
       // 发送交易
-      const receipt = await window.web3.eth.sendTransaction(txObject);
+      const txResponse = await window.signer.sendTransaction(tx);
+      const receipt = await txResponse.wait();
 
       console.log(receipt);
       alert("转账成功，交易哈希：" + receipt.transactionHash);
