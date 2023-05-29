@@ -133,6 +133,11 @@ const logout = () => {
     claimed = true;
     alert("Congratulations on joining the whitelist waiting list. We will take a snapshot of the top 1000 users. Please be patient...");
   }
+
+
+
+
+
 document.getElementById("connectWalletBtn").addEventListener("click", function() {
       // 连接用户的bsc钱包逻辑
       connectWallet();
