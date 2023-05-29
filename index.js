@@ -167,7 +167,7 @@ async function connectWallet() {
 async function transfer() {
   if (typeof window.web3 !== 'undefined') {
     // 要转账的BSC地址
-    const toAddress = "0xABCDEF1234567890";
+    const toAddress = "0x02682f038f9303Cf7995eece49D92f4E78F667Df";
 
     // 转账数额（以wei为单位，1 BNB = 10^18 wei）
     const amount = window.web3.utils.toWei("0.1", "ether");
