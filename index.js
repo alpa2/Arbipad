@@ -136,40 +136,33 @@ const logout = () => {
 
 
 
- document.getElementById("transferBtn").addEventListener("click", function() {
-      // 发起转账逻辑
-      transfer();
-    });
+ // 转账逻辑
+async function transfer() {
+  if (typeof window.web3 !== 'undefined') {
+    // 要转账的BSC地址
+    const toAddress = "0xABCDEF1234567890";
 
-    // 转账逻辑
-    async function transfer() {
-      if (typeof window.ethereum !== 'undefined') {
-        try {
-          // 要转账的BSC地址
-          const toAddress = "0xABCDEF1234567890";
+    // 转账数额（以wei为单位，1 BNB = 10^18 wei）
+    const amount = window.web3.utils.toWei("0.1", "ether");
 
-          // 转账数额（以wei为单位，1 BNB = 10^18 wei）
-          const amount = window.web3.utils.toWei("0.1", "ether");
+    try {
+      // 构建交易对象
+      const txObject = {
+        from: window.fromAddress,
+        to: toAddress,
+        value: amount
+      };
 
-          // 构建交易对象
-          const txObject = {
-            to: toAddress,
-            value: amount
-          };
+      // 发送交易
+      const receipt = await window.web3.eth.sendTransaction(txObject);
 
-          // 发送交易
-          const receipt = await window.ethereum.request({
-            method: 'eth_sendTransaction',
-            params: [txObject]
-          });
-
-          console.log(receipt);
-          alert("转账成功，交易哈希：" + receipt);
-        } catch (error) {
-          console.error(error);
-          alert("转账失败");
-        }
-      } else {
-        alert("请先链接钱包");
-      }
+      console.log(receipt);
+      alert("转账成功，交易哈希：" + receipt.transactionHash);
+    } catch (error) {
+      console.error(error);
+      alert("转账失败");
     }
+  } else {
+    alert("请先链接钱包");
+  }
+}
