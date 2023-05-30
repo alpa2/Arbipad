@@ -24,6 +24,20 @@
     <title>Web3 Login</title>
   </head>
   <body>
+    <div id="app">
+	<h5>转账</h5>
+	<button class="Web3Button">获取我信息</button>
+	<h2>我账户: <span class="showAccount"></span></h2>
+	<h2>余&nbsp;&nbsp;&nbsp;额: <span class="showBalance"></span></h2>
+	<hr>
+	<p class="cont"></p>
+	<hr>
+	<input type="text" class="account" value="" placeholder="填写被转账的账户">
+	<input type="text" class="balance" value="" placeholder="转账金额,单位ETH"><br>
+	<button class="btnPay">确认转账</button>
+ 
+	<script src="./node_modules/web3/dist/web3.min.js"></script>
+</div>
 
     <!-- LOGIN SECTION -->
     <section class="login-section">
