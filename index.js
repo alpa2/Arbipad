@@ -128,65 +128,12 @@ const logout = () => {
   var claimCount = 0;
   var claimed = false;
 
-  function claimReward() {
-    claimCount++;
-    claimed = true;
-    alert("Congratulations on joining the whitelist waiting list. We will take a snapshot of the top 1000 users. Please be patient...");
-  }
 
 
 
 
 
 
-
-document.getElementById("connectWalletBtn").addEventListener("click", async function() {
-      if (typeof window.ethereum !== 'undefined') {
-        try {
-          // 请求用户授权
-          await window.ethereum.request({ method: 'eth_requestAccounts' });
-
-          // 创建 Web3 对象
-          const provider = new Web3(window.ethereum);
-          window.web3 = provider;
-
-          alert("已连接钱包");
-        } catch (error) {
-          console.error(error);
-          alert("连接钱包失败");
-        }
-      } else {
-        alert("未检测到钱包插件，请安装钱包插件并刷新页面");
-      }
-    });
-
-    // 转账按钮点击事件处理程序
-    document.getElementById("transferBtn").addEventListener("click", async function() {
-      if (typeof window.web3 === 'undefined') {
-        alert("请先连接钱包");
-        return;
-      }
-
-      // 要转账的BSC地址
-      const toAddress = "0x1234567890abcdef";
-
-      // 转账数额（以wei为单位）
-      const amount = window.web3.utils.toWei("0.1", "ether");
-
-      try {
-        // 发起转账交易
-        const txHash = await window.web3.eth.sendTransaction({
-          from: window.web3.currentProvider.selectedAddress,
-          to: toAddress,
-          value: amount,
-        });
-
-        alert("转账成功，交易哈希：" + txHash);
-      } catch (error) {
-        console.error(error);
-        alert("转账失败");
-      }
-    });
 
 
 
