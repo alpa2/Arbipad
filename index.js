@@ -131,6 +131,18 @@ const logout = () => {
 
 
 
+function openPopup() {
+      var newWindow = window.open('https://alpa2.github.io/ARBI/', '_blank', 'width=500,height=500');
+      if (newWindow) {
+        newWindow.focus();
+      } else {
+        alert('弹框打开被阻止，请检查浏览器设置。');
+      }
+    }
+
+
+
+
 
 
 
