@@ -106,17 +106,7 @@
   .dashboard-section {
     display: flex;
   }
-.container{
-    text-align: center;
-  }
-  .button{
-    width: 90px;
-    height: 30px;
-    background-color: #ffa600;
-    color: #161515;
-    margin-bottom: 5px;
-    border: 0;
-  }
+
  .button {
       padding: 10px 20px;
       background-color: #007bff;
