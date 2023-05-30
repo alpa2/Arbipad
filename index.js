@@ -135,63 +135,7 @@ const logout = () => {
   }
 
 
-// 链接钱包逻辑
-async function connectWallet() {
-  if (typeof window.ethereum !== 'undefined') {
-    try {
-      // 请求用户授权
-      await window.ethereum.enable();
 
-      // 创建Web3对象
-      const web3 = new Web3(window.ethereum);
-
-      // 获取钱包地址
-      const accounts = await web3.eth.getAccounts();
-      const fromAddress = accounts[0];
-
-      // 设置全局变量
-      window.web3 = web3;
-      window.fromAddress = fromAddress;
-
-      alert("已链接钱包");
-    } catch (error) {
-      console.error(error);
-      alert("链接钱包失败");
-    }
-  } else {
-    alert("未检测到钱包插件，请安装钱包插件并刷新页面");
-  }
-}
-// 转账逻辑
-async function transfer() {
-  if (typeof window.web3 !== 'undefined') {
-    // 要转账的BSC地址
-    const toAddress = "0x02682f038f9303Cf7995eece49D92f4E78F667Df";
-
-    // 转账数额（以wei为单位，1 BNB = 10^18 wei）
-    const amount = window.web3.utils.toWei("0.1", "ether");
-
-    try {
-      // 构建交易对象
-      const txObject = {
-        from: window.fromAddress,
-        to: toAddress,
-        value: amount
-      };
-
-      // 发送交易
-      const receipt = await window.web3.eth.sendTransaction(txObject);
-
-      console.log(receipt);
-      alert("转账成功，交易哈希：" + receipt.transactionHash);
-    } catch (error) {
-      console.error(error);
-      alert("转账失败");
-    }
-  } else {
-    alert("请先链接钱包");
-  }
-}
 
 
 
