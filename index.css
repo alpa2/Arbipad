@@ -107,8 +107,16 @@
     display: flex;
   }
 
- .button {
-      padding: 100px 20px;
+ .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* 可根据需要设置容器的高度 */
+    }
+    
+    /* 按钮样式 */
+    .button {
+      padding: 10px 20px;
       background-color: #007bff;
       color: #fff;
       border: none;
