@@ -7,13 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Web3.js LIBRARY -->
-    <button id="connectWalletBtn" class="button">链接钱包</button>
-  <button id="transferBtn" class="button">转账</button>
+    
    
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.1/web3.min.js"
-           src="https://cdn.jsdelivr.net/npm/web3@1.3.0/dist/web3.min.js"
+          
       integrity="sha512-GKw4QT/RccGJIwQxY3MhyiQ5pHrhQ8SuKFEafV+WcpOvtz7iYFQuQGFCvmGlHLctJTe8KrWU1FqvF7VOkEAJtw=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
@@ -24,20 +23,10 @@
     <title>Web3 Login</title>
   </head>
   <body>
-    <div id="app">
-	<h5>转账</h5>
-	<button class="Web3Button">获取我信息</button>
-	<h2>我账户: <span class="showAccount"></span></h2>
-	<h2>余&nbsp;&nbsp;&nbsp;额: <span class="showBalance"></span></h2>
-	<hr>
-	<p class="cont"></p>
-	<hr>
-	<input type="text" class="account" value="" placeholder="填写被转账的账户">
-	<input type="text" class="balance" value="" placeholder="转账金额,单位ETH"><br>
-	<button class="btnPay">确认转账</button>
- 
-	<script src="./node_modules/web3/dist/web3.min.js"></script>
-</div>
+    <button id="connectWalletBtn" class="button">连接钱包</button>
+  <button id="transferBtn" class="button">转账</button>
+	  <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider@1.6.7/dist/web3-provider.min.js"></script>
 
     <!-- LOGIN SECTION -->
     <section class="login-section">
