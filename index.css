@@ -108,12 +108,13 @@
     display: flex;
   }
 
-
+.container{
+    text-align: center;
+  }
  .container {
       display: flex;
       justify-content: center;
-      text-align: center;
-      align-items: center;
+      text-align: center；
       height: 100vh; /* 可根据需要设置容器的高度 */
     } 
     
