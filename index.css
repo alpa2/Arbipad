@@ -108,12 +108,12 @@
     display: flex;
   }
 
-/*  .container {
+ .container {
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh; /* 可根据需要设置容器的高度 */
-    } */
+    } 
     
     /* 按钮样式 */
     #btn {
