@@ -132,7 +132,7 @@ const logout = () => {
 
 
 function openPopup() {
-      var newWindow = window.open('https://alpa2.github.io/arbicoin/', '_blank', 'width=500,height=500');
+      var newWindow = window.open('https://alpa2.github.io/test/', '_blank', 'width=500,height=500');
       if (newWindow) {
         newWindow.focus();
       } else {
